@@ -45,20 +45,26 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # cors 
     "corsheaders",
-    # drf
-    'rest_framework',
-    # auth 
-    'oauth2_provider',
-    'social_django',
-    'drf_social_oauth2',
+    # dj_rest_dependencies
+     'rest_framework',
+    'rest_framework.authtoken',
+    # dj_rest
+    'dj_rest_auth'
+
+    # for sso with allauth 
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'dj_rest_auth.registration',
+    # allauth
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+
 
 ]
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        # 'oauth2_provider.ext.rest_framework.OAuth2Authentication',  # django-oauth-toolkit < 1.0.0
-        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',  # django-oauth-toolkit >= 1.0.0
-        'drf_social_oauth2.authentication.SocialAuthentication',
     ),
 }
 
@@ -91,9 +97,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                # auth 
-                'social_django.context_processors.backends',
-                'social_django.context_processors.login_redirect',
+               
+                
             ],
         },
     },
@@ -155,24 +160,12 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTHENTICATION_BACKENDS = (
-    # Google OAuth2
-    'social_core.backends.google.GoogleOAuth2',
-
-    # drf-social-oauth2
-    'drf_social_oauth2.backends.DjangoOAuth2',
 
     # Django
     'django.contrib.auth.backends.ModelBackend',
+
 )
 
-# Google configuration
-# google app id 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = env("GOOGLE_APP_ID")
-# google app secret
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = env("GOOGLE_APP_SECRET")
 
-# Define SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE to get extra permissions from Google.
-SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
-    'https://www.googleapis.com/auth/userinfo.email',
-    'https://www.googleapis.com/auth/userinfo.profile',
-]
+# using all auth settings
+SITE_ID = 1
