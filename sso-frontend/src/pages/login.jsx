@@ -1,8 +1,26 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const handleLogin = (credentials) => {
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
+const CLIENT_ID = import.meta.env.VITE_CLIENT_ID;
+const CLIENT_SECRET = import.meta.env.VITE_CLIENT_SECRET;
+
+const handleLogin = async (credentials) => {
   alert(JSON.stringify(credentials));
+  try {
+    const { data } = await axios.post(`${BACKEND_URL}/auth/token/`, {
+      client_id: CLIENT_ID,
+      client_secret: CLIENT_SECRET,
+      grant_type: "password",
+      username: "",
+      password: "",
+    });
+
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 const login = () => {
