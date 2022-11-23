@@ -1,0 +1,8 @@
+
+db.*
+.gitignore
+README.md
+__pycache__
+.venv
+.env.example
+sso-frontend

@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  drf:
+    container_name: drf
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    # syncs changes made in this dir to the container
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
