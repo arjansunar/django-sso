@@ -2,7 +2,7 @@ Todo
 
 - [x] try dj-rest-auth --> had issues
 - [x] try django-social-auth2
-- [] try facebook login
+- [x] try facebook login
 
 ### google login
 

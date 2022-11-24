@@ -78,6 +78,7 @@ MIDDLEWARE = [
 
 CORS_ORIGIN_WHITELIST = (
   'http://localhost:5173',
+  'https://localhost:5173',
 )
 
 ROOT_URLCONF = 'django_sso.urls'
@@ -159,8 +160,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTHENTICATION_BACKENDS = (
 
     #  # Facebook OAuth2
-    # 'social_core.backends.facebook.FacebookAppOAuth2',
-    # 'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.facebook.FacebookAppOAuth2',
+    'social_core.backends.facebook.FacebookOAuth2',
 
     # Google OAuth2
     'social_core.backends.google.GoogleOAuth2',
@@ -172,16 +173,16 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
-# # Facebook configuration
-# SOCIAL_AUTH_FACEBOOK_KEY = '<your app id goes here>'
-# SOCIAL_AUTH_FACEBOOK_SECRET = '<your app secret goes here>'
+# Facebook configuration
+SOCIAL_AUTH_FACEBOOK_KEY = env('FB_APP_ID')
+SOCIAL_AUTH_FACEBOOK_SECRET = env('FB_APP_SECRET')
 
-# # Define SOCIAL_AUTH_FACEBOOK_SCOPE to get extra permissions from Facebook.
-# # Email is not sent by default, to get it, you must request the email permission.
-# SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
-# SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
-#     'fields': 'id, name, email'
-# }
+# Define SOCIAL_AUTH_FACEBOOK_SCOPE to get extra permissions from Facebook.
+# Email is not sent by default, to get it, you must request the email permission.
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+    'fields': 'id, name, email'
+}
 
 # Google configuration
 # google app id 

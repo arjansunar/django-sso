@@ -1,14 +1,20 @@
 import React, { useCallback, useState } from "react";
 import axios from "axios";
 
-import { LoginSocialGoogle } from "reactjs-social-login";
-import { GoogleLoginButton } from "react-social-login-buttons";
+import { LoginSocialGoogle, LoginSocialFacebook } from "reactjs-social-login";
+import {
+  GoogleLoginButton,
+  FacebookLoginButton,
+} from "react-social-login-buttons";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const CLIENT_ID = import.meta.env.VITE_CLIENT_ID;
 const CLIENT_SECRET = import.meta.env.VITE_CLIENT_SECRET;
 const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+const FB_CLIENT_ID = import.meta.env.VITE_FB_CLIENT_ID;
+
+console.log({ FB_CLIENT_ID });
 
 const handleLogin = async (credentials) => {
   alert(JSON.stringify(credentials));
@@ -26,13 +32,13 @@ const handleLogin = async (credentials) => {
   }
 };
 
-const handleSSOLogin = async (access_token) => {
+const handleSSOLogin = async (access_token, backend) => {
   try {
     const { data } = await axios.post(`${BACKEND_URL}/auth/convert-token`, {
       grant_type: "convert_token",
       client_id: CLIENT_ID,
       client_secret: CLIENT_SECRET,
-      backend: "google-oauth2",
+      backend,
       token: access_token,
     });
 
@@ -82,7 +88,7 @@ const login = () => {
             client_id={GOOGLE_CLIENT_ID}
             onResolve={(res) => {
               const { access_token } = res.data;
-              handleSSOLogin(access_token)
+              handleSSOLogin(access_token, "google-oauth2")
                 .then((data) => setLoginRes(data))
                 .catch((e) => console.error(e));
             }}
@@ -90,6 +96,18 @@ const login = () => {
           >
             <GoogleLoginButton />
           </LoginSocialGoogle>
+          <LoginSocialFacebook
+            appId={FB_CLIENT_ID}
+            onResolve={(res) => {
+              const { accessToken } = res.data;
+              handleSSOLogin(accessToken, "facebook")
+                .then((data) => setLoginRes(data))
+                .catch((e) => console.error(e));
+            }}
+            onReject={(reject) => console.error(reject)}
+          >
+            <FacebookLoginButton />
+          </LoginSocialFacebook>
         </div>
       ) : (
         <form
