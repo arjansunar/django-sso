@@ -6,3 +6,8 @@ __pycache__
 .venv
 .env.example
 sso-frontend
+
+# docker files 
+.dockerignore 
+docker-compose.yaml
+Dockerfile
