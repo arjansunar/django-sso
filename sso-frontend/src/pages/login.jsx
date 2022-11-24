@@ -87,6 +87,7 @@ const login = () => {
           <LoginSocialGoogle
             client_id={GOOGLE_CLIENT_ID}
             onResolve={(res) => {
+              console.log({ google_res: res });
               const { access_token } = res.data;
               handleSSOLogin(access_token, "google-oauth2")
                 .then((data) => setLoginRes(data))

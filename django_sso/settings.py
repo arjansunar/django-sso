@@ -192,8 +192,8 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = env("GOOGLE_APP_SECRET")
 
 # Define SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE to get extra permissions from Google.
 SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
-    'https://www.googleapis.com/auth/userinfo.email',
-    'https://www.googleapis.com/auth/userinfo.profile',
+    'profile',
+    'email'
 ]
 
 # SOCIAL_AUTH_USER_FIELDS= ['email','password','username']
