@@ -17,7 +17,6 @@ const FB_CLIENT_ID = import.meta.env.VITE_FB_CLIENT_ID;
 console.log({ FB_CLIENT_ID });
 
 const handleLogin = async (credentials) => {
-  alert(JSON.stringify(credentials));
   try {
     const { data } = await axios.post(`${BACKEND_URL}/auth/token/`, {
       client_id: CLIENT_ID,
