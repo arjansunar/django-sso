@@ -51,6 +51,8 @@ INSTALLED_APPS = [
     'oauth2_provider',
     'social_django',
     'drf_social_oauth2',
+    # local
+    'user'
 
 ]
 
@@ -155,6 +157,11 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTHENTICATION_BACKENDS = (
+
+    #  # Facebook OAuth2
+    # 'social_core.backends.facebook.FacebookAppOAuth2',
+    # 'social_core.backends.facebook.FacebookOAuth2',
+
     # Google OAuth2
     'social_core.backends.google.GoogleOAuth2',
 
@@ -164,6 +171,17 @@ AUTHENTICATION_BACKENDS = (
     # Django
     'django.contrib.auth.backends.ModelBackend',
 )
+
+# # Facebook configuration
+# SOCIAL_AUTH_FACEBOOK_KEY = '<your app id goes here>'
+# SOCIAL_AUTH_FACEBOOK_SECRET = '<your app secret goes here>'
+
+# # Define SOCIAL_AUTH_FACEBOOK_SCOPE to get extra permissions from Facebook.
+# # Email is not sent by default, to get it, you must request the email permission.
+# SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+# SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+#     'fields': 'id, name, email'
+# }
 
 # Google configuration
 # google app id 
@@ -176,3 +194,9 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
     'https://www.googleapis.com/auth/userinfo.email',
     'https://www.googleapis.com/auth/userinfo.profile',
 ]
+
+# SOCIAL_AUTH_USER_FIELDS= ['email','password','username']
+SOCIAL_AUTH_USER_FIELDS = ['email', 'username', 'first_name','last_name', 'password']
+# auth user model 
+AUTH_USER_MODEL="user.CustomUser"
+ACCOUNT_EMAIL_REQUIRED = True 
