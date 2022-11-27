@@ -85,12 +85,14 @@ const login = () => {
         <div>
           <LoginSocialGoogle
             client_id={GOOGLE_CLIENT_ID}
+            access_type="online"
+            scope="https://www.googleapis.com/auth/userinfo.email"
             onResolve={(res) => {
               console.log({ google_res: res });
-              const { access_token } = res.data;
-              handleSSOLogin(access_token, "google-oauth2")
-                .then((data) => setLoginRes(data))
-                .catch((e) => console.error(e));
+              // const { access_token } = res.data;
+              // handleSSOLogin(access_token, "google-oauth2")
+              //   .then((data) => setLoginRes(data))
+              //   .catch((e) => console.error(e));
             }}
             onReject={(reject) => console.error(reject)}
           >
